@@ -11,25 +11,41 @@ function next(date, increment) {
 		increment -= 1;
 	}
 
-	// calculate how many business days are left in the week
-	var daysLeft = (6 - date.getDay()) - 1;
-	console.log("daysLeft: " + daysLeft);
-	console.log("increment: " + increment);
-
-	// if the increment is greater than the number of days left
-	if (increment > daysLeft) {
-		// if the increment is more than a single work week
-		if (Math.floor(((increment + 1) / 5)) > 0) {
-			var numWeeks = Math.floor(((increment + 1) / 5));
-			var leftOverDays = (increment + 1) - (numWeeks * 5);
-			console.log("numWeeks: " + numWeeks);
-			console.log("leftOverDays: " + leftOverDays);
-			increment += (2 * numWeeks) + leftOverDays;
-			//increment = increment + (2 * Math.floor(((increment + 1) / 5)));
-		} else {
-			increment += 2;
-		}
+	// check to see if today is Saturday or Sunday
+	if ((date.getDay() === 6) || (date.getDay() === 0)) {
+		increment += 1;
 	}
+
+	// first find out how many business days are left in the week
+	var daysLeft = (function () {
+		if ((date.getDay() === 6) || (date.getDay() === 0)) {
+			return 5;
+		} else {
+			return (6 - date.getDay()) - 1;
+		}
+	})();
+	console.log("daysLeft: " + daysLeft);
+
+	// then check to see if the increment is greater than the number of business days left
+	if (increment > daysLeft) {
+		// if the increment is greater than the number of business days left, begin counting week-ends starting at 1
+		var numWeekEnds = 1;
+		// count the number of weeks the increment spans
+		var numWeeks = Math.floor(((increment) / 5));
+		console.log("numWeeks: " + numWeeks);
+		// if the increment spans more than 1 week
+		if (numWeeks > 1) {
+			// add the number of weeks to numWeekEnds
+			numWeekEnds += numWeeks;
+		}
+
+		console.log("increment before adding week-ends: " + increment);
+		// add the number of week-end days to the increment
+		increment += numWeekEnds * 2;
+		console.log("increment after adding week-ends: " + increment);
+	}
+
+	// if the increment is less than or equal to the number of business days left, then just proceed to get our date
 
 	newDate = incrementDate(date, increment);
 	newDate = nextWeekDay(newDate);
