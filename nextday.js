@@ -1,60 +1,43 @@
 function next(date, increment) {
-	// DEBUG:  console.log("next(" + date + ", " + increment + ")");
 	var today = new Date(date);
 	var newDate;
 
+	// initializing increment to zero if not passed in
 	if (increment === undefined) {
 		increment = 0;
 	}
 
+	// adjusting passed in increment by 1 because we are zero based
 	if (increment) {
 		increment -= 1;
 	}
 
-	// check to see if today is Saturday or Sunday
-	if ((date.getDay() === 6) || (date.getDay() === 0)) {
-		increment += 1;
+	var i = 0;
+	var dayOfWeek = parseInt(today.getDay(), 10);
+	if ((dayOfWeek === 6) || (dayOfWeek === 0)) {
+		// when starting on a weekend we increase the loop by 1
+		i++;
 	}
 
-	// first find out how many business days are left in the week
-	var daysLeft = (function () {
-		if ((date.getDay() === 6) || (date.getDay() === 0)) {
-			return 5;
-		} else {
-			return (6 - date.getDay()) - 1;
-		}
-	})();
-	console.log("daysLeft: " + daysLeft);
-
-	// then check to see if the increment is greater than the number of business days left
-	if (increment > daysLeft) {
-		// if the increment is greater than the number of business days left, begin counting week-ends starting at 1
-		var numWeekEnds = 1;
-		// count the number of weeks the increment spans
-		var numWeeks = Math.floor(((increment) / 5));
-		console.log("numWeeks: " + numWeeks);
-		// if the increment spans more than 1 week
-		if (numWeeks > 1) {
-			// add the number of weeks to numWeekEnds
-			numWeekEnds += numWeeks;
+	// starting today increment the date by 1 for each business day
+	do {
+		var day = parseInt(today.getDay(), 10);
+		if (!((day === 6) || (day === 0))) {
+			i++;
 		}
 
-		console.log("increment before adding week-ends: " + increment);
-		// add the number of week-end days to the increment
-		increment += numWeekEnds * 2;
-		console.log("increment after adding week-ends: " + increment);
+		today = incrementDate(today, 1);
+	} while (i <= increment);
+
+	dayOfWeek = parseInt(today.getDay(), 10);
+	if ((dayOfWeek === 6) || (dayOfWeek === 0)) {
+		today = nextWeekDay(today);
 	}
 
-	// if the increment is less than or equal to the number of business days left, then just proceed to get our date
-
-	newDate = incrementDate(date, increment);
-	newDate = nextWeekDay(newDate);
-
-	return newDate;
+	return today;
 }
 
 function nextWeekDay(date) {
-	console.log("nextWeekDay(" + date + ")");
 	var calculatedDay = date.getDate();
 	var dateString;
 
@@ -63,7 +46,6 @@ function nextWeekDay(date) {
 		calculatedDay += 2;
 	} else if (date.getDay() === 5) {
 		// it's Friday, so add 3 days to get Monday
-		console.log("it's friday");
 		calculatedDay += 3;
 	} else {
 		// any other day of the week we just add 1 to get the next week day
@@ -76,13 +58,11 @@ function nextWeekDay(date) {
 		nextWeekDay(checkDate);
 	} else {
 		dateString = (date.getMonth() + 1) + "/" + calculatedDay + "/" + date.getFullYear();	
-		console.log("our final date string: " + dateString);
 		return new Date(dateString);
 	}
 }
 
 function adjustForMonth(calculatedDay, date) {
-	console.log("adjustForMonth(" + calculatedDay + ", " + date + ")");
 	var newDate;
 	var newDay = calculatedDay - daysInMonth(date.getMonth(), date.getFullYear());
 
@@ -94,16 +74,13 @@ function adjustForMonth(calculatedDay, date) {
 		}
 		return new Date(newDate);
 	} else {
-		console.log("no month adjustment");
 		// if the date was valid then return false to indicate nothing was adjusted
 		return false;
 	}
 }
 
 function incrementDate(date, increment) {
-	console.log("incrementDate(" + date + ", " + increment + ")");
 	var newDate = parseInt(date.getDate(), 10) + increment;
-	console.log("newDate "+ newDate);
 	var newFullDateString;
 
 	// do we have to move into a new month?
@@ -119,7 +96,6 @@ function incrementDate(date, increment) {
 		newFullDateString = (parseInt(date.getMonth(), 10) + 1) + "/" + newDate + "/" + date.getFullYear();
 	}
 
-	console.log("newFullDateString " + newFullDateString);
 	return new Date(newFullDateString);
 }
 
