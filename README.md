@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/chrisanderss0n/nextday.svg?branch=master)](https://travis-ci.org/chrisanderss0n/nextday)
+
 # nextday helps you find week-days.
 
 You give the library a date and an optional number of days, and it returns to you a date of a week-day that fits your criteria.
