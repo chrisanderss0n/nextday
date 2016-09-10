@@ -1,9 +1,9 @@
 # nextday
-nextday helps you find week-days.  
+<h1>nextday helps you find week-days.</h1>
 
 You give the library a date, and it tells you the date of the next week-day.
 
-Give the library a date, and an number of days and it will tell you the date of the next week-day N week-days from your date.
+Give the library a date, and a number of days and it will tell you the date of the next week-day N week-days from your date.
 
 The library accounts for week-ends, months and years...but not holidays (yet).
 
