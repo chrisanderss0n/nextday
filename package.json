@@ -1,0 +1,38 @@
+{
+  "name": "nextday",
+  "version": "1.0.0",
+  "description": "A javascript library that helps you find week-days.",
+  "main": "nextday.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisanderss0n/nextday.git"
+  },
+  "keywords": [
+    "nextday",
+    "date",
+    "weekday",
+    "business",
+    "day",
+    "workday",
+    "week-day",
+    "week",
+    "day",
+    "work",
+    "day"
+  ],
+  "author": "Christopher Andersson <christopher@nycode.co> (https://github.com/chrisanderss0n)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chrisanderss0n/nextday/issues"
+  },
+  "homepage": "https://github.com/chrisanderss0n/nextday#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^3.0.1",
+    "mocha": "^3.0.2"
+  }
+}
