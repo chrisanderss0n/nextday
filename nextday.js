@@ -1,84 +1,110 @@
 function next(date, increment) {
-	var months_string = '{"0":"January","1":"February","2":"March","3":"April","4":"May","5":"June","6":"July","7":"August","8":"September","9":"October","10":"November","11":"December"}';
-	var months = JSON.parse(months_string);
+	// DEBUG:  console.log("next(" + date + ", " + increment + ")");
 	var today = new Date(date);
+	var newDate;
 
-	// wrapping the anonymous function in () and then adding () at the end means that the function will execute
-	var nextDate = (function() {
-		// get the next weekday incremented by 1
-		// nextWeekDay could give us a number that isn't valid (i.e. day 33 when there are only 30 days in the month)
-		var proposedDay = nextWeekDay(today, increment);
-		// getting a new date in the next month if proposedDay exceeded the current month
-		var adjustedDay = adjustForMonth(proposedDay, today);
-
-		var dateString;
-		
-		// if they are the same then we didn't have to move into the next month
-		if (proposedDay === adjustedDay) {
-			dateString = today.getMonth() + 1 + "/" + proposedDay + "/" + today.getFullYear();
-			return new Date(dateString);
-		} else {
-			var newDate;
-			// we did move to the next month, so let's make sure our adjustedDay is a weekday
-			// first we have to check to see if we are moving into a new year
-			if (today.getMonth() === 11) {
-				dateString =  "1/" + adjustedDay + "/" + (parseInt(today.getFullYear(),10) + 1);
-				newDate = new Date(dateString);
-				// is it Sunday or Saturday?
-				if ((newDate.getDay() === 0) || (newDate.getDay() === 6)) {
-					// it is so get the next week day
-					dateString = "1/" + nextWeekDay(newDate, 0) + "/" + (parseInt(today.getFullYear(),10) + 1);	
-				}
-			} else {
-				dateString = today.getMonth() + 2 + "/" + adjustedDay + "/" + today.getFullYear();
-				newDate = new Date(dateString);
-				// is it Sunday or Saturday?
-				if ((newDate.getDay() === 0) || (newDate.getDay() === 6)) {
-					// it is so get the next week day
-					dateString = today.getMonth() + 2 + "/" + nextWeekDay(newDate, 0) + "/" + today.getFullYear();	
-				}
-			}
-			return new Date(dateString);
-		}
-	})();
-
-	var finalValue = months[nextDate.getMonth()] + " " + nextDate.getDate();
-	return finalValue;
-}
-
-function nextWeekDay(date, increment) {
-	if (!increment) {
+	if (increment === undefined) {
 		increment = 0;
 	}
 
-	var returnVal;
-
-	// the below logic doesn't account for increments larger than 1
-	// so if someone put in 3 for example, the logic could very easily return Saturday or Sunday
-	if (date.getDay() === 6) {
-		returnVal = date.getDate() + 2 + increment;
-	} else if (date.getDay() === 5) {
-		returnVal = date.getDate() + 3 + increment;
-	} else if (date.getDay() === 4) {
-		if (increment > 0) {
-			returnVal = date.getDate() + 3 + increment;	
-		} else {
-			returnVal = date.getDate() + 1 + increment;
-		}
-	} else {
-		returnVal = date.getDate() + 1 + increment;
+	if (increment) {
+		increment -= 1;
 	}
 
+	// calculate how many business days are left in the week
+	var daysLeft = (6 - date.getDay()) - 1;
+	console.log("daysLeft: " + daysLeft);
+	console.log("increment: " + increment);
 
-	return returnVal;
+	// if the increment is greater than the number of days left
+	if (increment > daysLeft) {
+		// if the increment is more than a single work week
+		if (Math.floor(((increment + 1) / 5)) > 0) {
+			var numWeeks = Math.floor(((increment + 1) / 5));
+			var leftOverDays = (increment + 1) - (numWeeks * 5);
+			console.log("numWeeks: " + numWeeks);
+			console.log("leftOverDays: " + leftOverDays);
+			increment += (2 * numWeeks) + leftOverDays;
+			//increment = increment + (2 * Math.floor(((increment + 1) / 5)));
+		} else {
+			increment += 2;
+		}
+	}
+
+	newDate = incrementDate(date, increment);
+	newDate = nextWeekDay(newDate);
+
+	return newDate;
+}
+
+function nextWeekDay(date) {
+	console.log("nextWeekDay(" + date + ")");
+	var calculatedDay = date.getDate();
+	var dateString;
+
+	if (date.getDay() === 6) {
+		// it's Saturday, so add 2 days to get Monday
+		calculatedDay += 2;
+	} else if (date.getDay() === 5) {
+		// it's Friday, so add 3 days to get Monday
+		console.log("it's friday");
+		calculatedDay += 3;
+	} else {
+		// any other day of the week we just add 1 to get the next week day
+		calculatedDay += 1;
+	}
+
+	var checkDate = adjustForMonth(calculatedDay, date);
+
+	if (checkDate) {
+		nextWeekDay(checkDate);
+	} else {
+		dateString = (date.getMonth() + 1) + "/" + calculatedDay + "/" + date.getFullYear();	
+		console.log("our final date string: " + dateString);
+		return new Date(dateString);
+	}
 }
 
 function adjustForMonth(calculatedDay, date) {
-	if (calculatedDay > daysInMonth(date.getMonth(), date.getFullYear())) {
-		return 1;
+	console.log("adjustForMonth(" + calculatedDay + ", " + date + ")");
+	var newDate;
+	var newDay = calculatedDay - daysInMonth(date.getMonth(), date.getFullYear());
+
+	if (newDay > 0) {
+		if (date.getMonth() === 11) {
+			newDate = "1/" + newDay + "/" + (parseInt(date.getFullYear(), 10) + 1);
+		} else {
+			newDate = (parseInt(date.getMonth(), 10) + 1) + "/" + newDay + "/" + date.getFullYear();
+		}
+		return new Date(newDate);
 	} else {
-		return calculatedDay;
+		console.log("no month adjustment");
+		// if the date was valid then return false to indicate nothing was adjusted
+		return false;
 	}
+}
+
+function incrementDate(date, increment) {
+	console.log("incrementDate(" + date + ", " + increment + ")");
+	var newDate = parseInt(date.getDate(), 10) + increment;
+	console.log("newDate "+ newDate);
+	var newFullDateString;
+
+	// do we have to move into a new month?
+	if (adjustForMonth(newDate, date)) {
+		// did we start in December?
+		if (date.getMonth() === 11) {
+			newFullDateString = "1/1/" + (parseInt(date.getFullYear(), 10) + 1);
+		} else {
+			// we have to add 2 because months are 0 based
+			newFullDateString = (parseInt(date.getMonth(), 10) + 2) + "/1/" + date.getFullYear();
+		}
+	} else {
+		newFullDateString = (parseInt(date.getMonth(), 10) + 1) + "/" + newDate + "/" + date.getFullYear();
+	}
+
+	console.log("newFullDateString " + newFullDateString);
+	return new Date(newFullDateString);
 }
 
 function daysInMonth(month, year) {
