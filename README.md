@@ -1,7 +1,6 @@
 [![Build Status](https://travis-ci.org/chrisanderss0n/nextday.svg?branch=master)](https://travis-ci.org/chrisanderss0n/nextday)
 
 # nextday helps you find week-days.
-
 You give the library a date and an optional number of days, and it returns to you a date of a week-day that fits your criteria.
 
 <h2>Example questions this library will answer</h2>
@@ -18,4 +17,10 @@ I did not intend to build this library.  I was building my company website (http
 
 I expected it would take me 30 mins to get that task done, and here we are with this library instead.
 
-Enjoy!
+#Installing
+Nextday is available on npm and Bower as "nextday-js"
+```
+bower install nextday-js
+OR
+npm install nextday-js
+```
