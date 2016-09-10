@@ -1,5 +1,4 @@
-# nextday
-<h1>nextday helps you find week-days.</h1>
+# nextday helps you find week-days.
 
 You give the library a date, and it tells you the date of the next week-day.
 
