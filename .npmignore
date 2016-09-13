@@ -16,3 +16,5 @@ gulp
 gulpfile.js
 .travis.yml
 spec
+bower.json
+dist

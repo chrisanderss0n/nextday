@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/chrisanderss0n/nextday.svg?branch=master)](https://travis-ci.org/chrisanderss0n/nextday)
+[![Build Status](https://travis-ci.org/chrisanderss0n/nextday.svg?branch=master)](https://travis-ci.org/chrisanderss0n/nextday) [![NPM version][npm-version-image]][npm-url] [![NPM downloads][npm-downloads-image]][npm-url] [![MIT License][license-image]][license-url] 
 
 # nextday helps you find week-days.
 You give the library a date and an optional number of days, and it returns to you a date of a week-day that fits your criteria.
