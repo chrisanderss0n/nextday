@@ -17,7 +17,37 @@ I did not intend to build this library.  I was building my company website (http
 
 I expected it would take me 30 mins to get that task done, and here we are with this library instead.
 
-#Installing
+# What might you use this for?
+
+A couple examples of what you might use this for:
+
+- Finding a date that's on a week-day for people trying to schedule a meeting
+- A reminder app where reminders happen on week-days only
+
+# Usage
+
+What is the next week-day from today?
+```
+var nextDay = require("nextday");
+var day = nextDay.next(new Date());
+```
+
+What is the 3rd week-day from today?
+```
+day = nextDay.next(new Date(), 3);
+```
+
+What is the 7th week-day from yesterday?
+```
+day = nextDay.next(new Date("9/9/2016"), 7);
+```
+
+What is the 1st week-day from December 31st?
+```
+day = nextDay.next(new Date("12/31/2016"));
+```
+
+# Installing
 Nextday is available on npm and Bower as "nextday-js"
 ```
 bower install nextday-js

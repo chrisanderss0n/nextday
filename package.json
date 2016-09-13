@@ -2,7 +2,7 @@
   "name": "nextday-js",
   "version": "1.0.0",
   "description": "A javascript library that helps you find week-days.",
-  "main": "nextday.js",
+  "main": "index.js",
   "scripts": {
     "test": "gulp test"
   },
