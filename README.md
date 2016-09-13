@@ -28,7 +28,7 @@ A couple examples of what you might use this for:
 
 What is the next week-day from today?
 ```
-var nextDay = require("nextday");
+var nextDay = require("nextday-js");
 var day = nextDay.next(new Date());
 ```
 
