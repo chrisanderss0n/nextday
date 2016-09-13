@@ -54,3 +54,10 @@ bower install nextday-js
 OR
 npm install nextday-js
 ```
+
+[license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-url]: LICENSE
+
+[npm-url]: https://npmjs.org/package/nextday-js
+[npm-version-image]: http://img.shields.io/npm/v/nextday-js.svg?style=flat
+[npm-downloads-image]: http://img.shields.io/npm/dm/nextday-js.svg?style=flat
