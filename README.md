@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/chrisanderss0n/nextday.svg?branch=master)](https://travis-ci.org/chrisanderss0n/nextday) [![NPM version][npm-version-image]][npm-url] [![NPM downloads][npm-downloads-image]][npm-url] [![MIT License][license-image]][license-url] 
+[![Build Status](https://travis-ci.org/chrisanderss0n/nextday.svg?branch=master)](https://travis-ci.org/chrisanderss0n/nextday) [![NPM version][npm-version-image]][npm-url] [![NPM downloads][npm-downloads-image]][npm-url] [![MIT License][license-image]][license-url] <span class="badge-daviddm"><a href="https://david-dm.org/chrisanderss0n/nextday" title="View the status of this project's dependencies on DavidDM"><img src="https://david-dm.org/chrisanderss0n/nextday.svg" alt="Dependency Status" /></a></span>
 
 # nextday helps you find week-days.
-You give the library a date and an optional number of days, and it returns to you a date of a week-day that fits your criteria.
+You give the library a date and an optional number of days, and it returns to you a date of a week-day that fits your criteria.  This ultra lightweight library has no dependencies.
 
 <h2>Example questions this library will answer</h2>
 
@@ -37,21 +37,19 @@ What is the 3rd week-day from today?
 day = nextDay.next(new Date(), 3);
 ```
 
-What is the 7th week-day from yesterday?
+What is the 7th week-day from September 9th, 2016?
 ```
 day = nextDay.next(new Date("9/9/2016"), 7);
 ```
 
-What is the 1st week-day from December 31st?
+What is the 1st week-day from December 31st, 2016?
 ```
 day = nextDay.next(new Date("12/31/2016"));
 ```
 
 # Installing
-Nextday is available on npm and Bower as "nextday-js"
+Nextday is available on npm as "nextday-js"
 ```
-bower install nextday-js
-OR
 npm install nextday-js
 ```
 

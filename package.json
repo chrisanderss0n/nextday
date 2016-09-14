@@ -14,16 +14,16 @@
     "nextday",
     "date",
     "weekday",
-    "business",
-    "day",
+    "business day",
     "workday",
     "week-day",
     "week",
     "day",
-    "work",
-    "day"
+    "work day",
+    "week day",
+    "calendar"
   ],
-  "author": "Christopher Andersson <christopher@nycode.co> (https://github.com/chrisanderss0n)",
+  "author": "Christopher Andersson <christopher@nycode.co> (https://nycode.co)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/chrisanderss0n/nextday/issues"
