@@ -13,7 +13,7 @@ You give the library a date and an optional number of days, and it returns to yo
 
 The library accounts for week-ends, months and years...but not holidays (yet).
 
-I did not intend to build this library.  I was building my company website (http://nycode.co), and just wanted to display the second business day from the current day on the page.  Sounds simple enough right?
+I did not intend to build this library.  I was building my company website [http://nycode.co](https://nycode.co), and just wanted to display the second business day from the current day on the page.  Sounds simple enough right?
 
 I expected it would take me 30 mins to get that task done, and here we are with this library instead.
 
