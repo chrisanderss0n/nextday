@@ -1,6 +1,6 @@
 {
   "name": "nextday-js",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A javascript library that helps you find week-days.",
   "main": "index.js",
   "scripts": {
